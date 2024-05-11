@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 35px;
-  padding: 25px 0;
+  padding: 20px 0;
 
   .rec.rec-arrow {
     background-color: #864d93;

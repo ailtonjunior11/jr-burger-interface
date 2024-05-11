@@ -1,9 +1,11 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-console */
+/* eslint-disable import/prefer-default-export */
+
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-elastic-carousel';
+import { useHistory } from 'react-router-dom';
 
 import Offers from '../../assets/offers.png';
+import { useCart } from '../../hooks/CartContext';
 import api from '../../services/api';
 import formatCurrency from '../../Utils/formatCurrency';
 import {
@@ -14,8 +16,10 @@ import {
   Button
 } from './styles';
 
-function OffersCarousel() {
+export function OffersCarousel() {
   const [offers, setOffers] = useState([]);
+  const { putProductInCart } = useCart();
+  const { push } = useHistory();
 
   useEffect(() => {
     async function loadOffers() {
@@ -27,7 +31,6 @@ function OffersCarousel() {
           return { ...product, formatedPrice: formatCurrency(product.price) };
         });
 
-      console.log(onlyOffers);
       setOffers(onlyOffers);
     }
 
@@ -56,12 +59,17 @@ function OffersCarousel() {
               <Image src={product.url} alt="foto do Produto" />
               <p>{product.name}</p>
               <p>{product.formatedPrice}</p>
-              <Button>Peça agora</Button>
+              <Button
+                onClick={() => {
+                  putProductInCart(product);
+                  push('/carrinho');
+                }}
+              >
+                Peça agora
+              </Button>
             </ContainerItens>
           ))}
       </Carousel>
     </Container>
   );
 }
-
-export default OffersCarousel;

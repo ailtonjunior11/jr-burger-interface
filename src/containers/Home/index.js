@@ -1,11 +1,11 @@
+/* eslint-disable import/prefer-default-export */
 import React from 'react';
 
 import LogoHome from '../../assets/logo-home.svg';
-import CategoryCarousel from '../../components/CategoryCarousel';
-import OffersCarousel from '../../components/OffersCarousel';
+import { CategoryCarousel, OffersCarousel } from '../../components';
 import { Container, HomeImg } from './styles';
 
-function Home() {
+export function Home() {
   return (
     <Container>
       <HomeImg src={LogoHome} alt="logo da home" />
@@ -14,5 +14,3 @@ function Home() {
     </Container>
   );
 }
-
-export default Home;

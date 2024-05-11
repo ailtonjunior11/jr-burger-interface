@@ -1,9 +1,13 @@
-/* eslint-disable no-console */
-/* eslint-disable react/button-has-type */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable import/prefer-default-export */
+
 import React, { useEffect, useState } from 'react';
 
+import PropTypes from 'prop-types';
+
 import LogoProducts from '../../assets/logo-products.svg';
-import CardProducts from '../../components/CardProduct';
+import { CardProduct } from '../../components';
 import api from '../../services/api';
 import formatCurrency from '../../Utils/formatCurrency';
 import {
@@ -14,11 +18,16 @@ import {
   ProductsContainer
 } from './styles';
 
-function Products() {
+export function Products({ location: { state } }) {
+  let categoryId = 0;
+  if (state?.categoryId) {
+    categoryId = state.categoryId;
+  }
+
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(0);
+  const [activeCategory, setActiveCategory] = useState(categoryId);
 
   useEffect(() => {
     async function loadCategories() {
@@ -76,11 +85,13 @@ function Products() {
       <ProductsContainer>
         {filteredProducts &&
           filteredProducts.map(product => (
-            <CardProducts key={product.id} product={product} />
+            <CardProduct key={product.id} product={product} />
           ))}
       </ProductsContainer>
     </Container>
   );
 }
 
-export default Products;
+Products.propTypes = {
+  location: PropTypes.object
+};

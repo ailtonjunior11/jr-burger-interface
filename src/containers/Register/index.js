@@ -1,8 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/alt-text */
+
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -13,7 +11,7 @@ import * as Yup from 'yup';
 
 import Logo from '../../assets/logo.svg';
 import RegisterImg from '../../assets/register-img.jpeg';
-import Button from '../../components/Button';
+import { Button, ErrorMessage } from '../../components';
 import api from '../../services/api';
 import {
   Container,
@@ -21,11 +19,10 @@ import {
   ContainerItens,
   Label,
   Input,
-  SignInLink,
-  ErrorMessage
+  SignInLink
 } from './styles';
 
-function Register() {
+export function Register() {
   const schema = Yup.object().shape({
     name: Yup.string().required('O seu nome é obrigatório!'),
     email: Yup.string()
@@ -125,5 +122,3 @@ function Register() {
     </Container>
   );
 }
-
-export default Register;

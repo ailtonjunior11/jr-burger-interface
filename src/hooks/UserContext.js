@@ -16,6 +16,10 @@ export function UserProvider({ children }) {
     await localStorage.setItem('jrburger:userData', JSON.stringify(userInfo));
   };
 
+  const logout = async () => {
+    await localStorage.removeItem('jrburger:userData');
+  };
+
   useEffect(() => {
     const loadUserData = async () => {
       const clientInfo = await localStorage.getItem('jrburger:userData');
@@ -29,7 +33,7 @@ export function UserProvider({ children }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ putUserData, userData }}>
+    <UserContext.Provider value={{ putUserData, userData, logout }}>
       {children}
     </UserContext.Provider>
   );

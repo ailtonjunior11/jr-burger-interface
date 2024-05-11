@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background-color: #ffffff;
-  box-shadow: 0px 10px 20px 0px rgba(57, 57, 57, 0.6);
+  background-color: #fff;
+  box-shadow: 0px 3px 16px 0px rgba(57, 57, 57, 0.6);
   border-radius: 30px;
   display: flex;
   gap: 12px;

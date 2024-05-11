@@ -1,5 +1,5 @@
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-console */
+/* eslint-disable import/prefer-default-export */
+
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-elastic-carousel';
 
@@ -13,7 +13,7 @@ import {
   Button
 } from './styles';
 
-function CategoryCarousel() {
+export function CategoryCarousel() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -46,12 +46,17 @@ function CategoryCarousel() {
           categories.map(category => (
             <ContainerItens key={category.id}>
               <Image src={category.url} alt="foto da categoria" />
-              <Button>{category.name}</Button>
+              <Button
+                to={{
+                  pathname: '/produtos',
+                  state: { categoryId: category.id }
+                }}
+              >
+                {category.name}
+              </Button>
             </ContainerItens>
           ))}
       </Carousel>
     </Container>
   );
 }
-
-export default CategoryCarousel;

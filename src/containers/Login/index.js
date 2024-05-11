@@ -1,8 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/alt-text */
+
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
@@ -13,7 +11,7 @@ import * as Yup from 'yup';
 
 import LoginImg from '../../assets/login-img.jpeg';
 import Logo from '../../assets/logo.svg';
-import Button from '../../components/Button';
+import { Button, ErrorMessage } from '../../components';
 import { useUser } from '../../hooks/UserContext';
 import api from '../../services/api';
 import {
@@ -22,11 +20,10 @@ import {
   ContainerItens,
   Label,
   Input,
-  SignInLink,
-  ErrorMessage
+  SignInLink
 } from './styles';
 
-function Login() {
+export function Login() {
   const history = useHistory();
   const { putUserData } = useUser();
 
@@ -63,7 +60,11 @@ function Login() {
     putUserData(data);
 
     setTimeout(() => {
-      history.push('/');
+      if (data.admin) {
+        history.push('/pedidos');
+      } else {
+        history.push('/');
+      }
     }, 1000);
   };
 
@@ -105,5 +106,3 @@ function Login() {
     </Container>
   );
 }
-
-export default Login;
